@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { actSubmitUserEmail } from '../redux/actions';
-import store from '../redux/store';
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,7 +12,6 @@ class Login extends React.Component {
         email: '',
         password: '',
       },
-      isValid: false,
     };
   }
 
@@ -47,45 +46,42 @@ class Login extends React.Component {
   };
 
   render() {
-    console.log(store.getState());
+    // console.log(store.getState());
     const { user } = this.state;
     const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     const passwordRegex = /^(?=.{6,})/;
+    const disable = user.email.toLowerCase().match(emailRegex)
+    && user.password.match(passwordRegex);
     return (
       <div>
         <form>
-          <label htmlFor='user-email'>
+          <label htmlFor="user-email">
             Email:
             <input
-              type='email'
-              name='user-email'
-              id='user_email'
-              placeholder='Email'
+              type="email"
+              name="user-email"
+              id="user_email"
+              placeholder="Email"
               // value='test@test.com'
-              data-testid='email-input'
-              onChange={this.handleValidation}
+              data-testid="email-input"
+              onChange={ this.handleValidation }
             />
           </label>
-          <label htmlFor='user_password'>
+          <label htmlFor="user_password">
             Senha:
             <input
-              type='text'
-              name='user_password'
-              id='user_password'
-              placeholder='Senha'
-              data-testid='password-input'
-              onChange={this.handleValidation}
+              type="text"
+              name="user_password"
+              id="user_password"
+              placeholder="Senha"
+              data-testid="password-input"
+              onChange={ this.handleValidation }
             />
           </label>
           <button
-            type='submit'
-            disabled={
-              !(
-                user.email.toLowerCase().match(emailRegex) &&
-                user.password.match(passwordRegex)
-              )
-            }
-            onClick={this.handleSubmit}
+            type="submit"
+            disabled={ !disable }
+            onClick={ this.handleSubmit }
           >
             Entrar
           </button>
@@ -94,5 +90,10 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape([]).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect(null)(Login);
