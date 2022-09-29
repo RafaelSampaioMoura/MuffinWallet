@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { actSubmitUserEmail } from '../redux/actions';
+import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { actSubmitUserEmail } from "../redux/actions";
 
 class Login extends React.Component {
   constructor(props) {
@@ -9,8 +9,8 @@ class Login extends React.Component {
 
     this.state = {
       user: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
     };
   }
@@ -18,7 +18,7 @@ class Login extends React.Component {
   handleValidation = ({ target }) => {
     // console.log(target);
 
-    if (target.id === 'user_email') {
+    if (target.id === "user_email") {
       this.setState((prevState) => ({
         user: {
           ...prevState.user,
@@ -27,7 +27,7 @@ class Login extends React.Component {
       }));
     }
 
-    if (target.id === 'user_password') {
+    if (target.id === "user_password") {
       this.setState((prevState) => ({
         user: {
           ...prevState.user,
@@ -42,7 +42,7 @@ class Login extends React.Component {
     const { user } = this.state;
     const { history, dispatch } = this.props;
     dispatch(actSubmitUserEmail(user.email));
-    history.push('/carteira');
+    history.push("/carteira");
   };
 
   render() {
@@ -50,43 +50,51 @@ class Login extends React.Component {
     const { user } = this.state;
     const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     const passwordRegex = /^(?=.{6,})/;
-    const disable = user.email.toLowerCase().match(emailRegex)
-    && user.password.match(passwordRegex);
+    const disable =
+      user.email.toLowerCase().match(emailRegex) &&
+      user.password.match(passwordRegex);
     return (
-      <div>
-        <form>
-          <label htmlFor="user-email">
-            Email:
-            <input
-              type="email"
-              name="user-email"
-              id="user_email"
-              placeholder="Email"
-              // value='test@test.com'
-              data-testid="email-input"
-              onChange={ this.handleValidation }
-            />
-          </label>
-          <label htmlFor="user_password">
-            Senha:
-            <input
-              type="text"
-              name="user_password"
-              id="user_password"
-              placeholder="Senha"
-              data-testid="password-input"
-              onChange={ this.handleValidation }
-            />
-          </label>
-          <button
-            type="submit"
-            disabled={ !disable }
-            onClick={ this.handleSubmit }
-          >
-            Entrar
-          </button>
-        </form>
-      </div>
+      <>
+        <div className='background'>
+          <div className='shape' />
+          <div className='shape' />
+        </div>
+        <div>
+          <form>
+            <h3>Login</h3>
+            <label htmlFor='user-email'>
+              Email:
+              <input
+                type='email'
+                name='user-email'
+                id='user_email'
+                placeholder='Email'
+                // value='test@test.com'
+                data-testid='email-input'
+                onChange={this.handleValidation}
+              />
+            </label>
+            <label htmlFor='user_password'>
+              Senha:
+              <input
+                type='text'
+                name='user_password'
+                id='user_password'
+                placeholder='Senha'
+                data-testid='password-input'
+                onChange={this.handleValidation}
+              />
+            </label>
+            <button
+              type='submit'
+              disabled={!disable}
+              onClick={this.handleSubmit}
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
+      </>
     );
   }
 }
