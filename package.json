@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@redux-devtools/core": "^3.13.1",
     "@sheerun/mutationobserver-shim": "0.3.3",
     "cypress": "10.4.0",
     "cypress-multi-reporters": "1.6.1",
