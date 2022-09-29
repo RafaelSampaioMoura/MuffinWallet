@@ -1,8 +1,9 @@
 // configure aqui sua store
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
-import { composeWithDevTools } from '@redux-devtools/core';
-import { thunk } from 'redux-thunk';
-import rootReducer from './reducers';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from '@redux-devtools/extension';
+
+import { rootReducer } from './reducers';
 
 const store = createStore(
   rootReducer,
