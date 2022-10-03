@@ -61,7 +61,7 @@ class Login extends React.Component {
           <div className='shape' />
         </div>
         <div>
-          <form>
+          <form className="login-form">
             <h3>Login</h3>
             <label htmlFor='user-email'>
               Email:
@@ -73,6 +73,7 @@ class Login extends React.Component {
                 // value='test@test.com'
                 data-testid='email-input'
                 onChange={this.handleValidation}
+                className='login-input'
               />
             </label>
             <label htmlFor='user_password'>
@@ -84,6 +85,7 @@ class Login extends React.Component {
                 placeholder='Senha'
                 data-testid='password-input'
                 onChange={this.handleValidation}
+                className='login-input'
               />
             </label>
             <button
