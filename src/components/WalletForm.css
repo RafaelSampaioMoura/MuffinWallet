@@ -32,3 +32,11 @@
   align-items: center;
   column-gap: 3px;
 }
+
+.wallet-form button {
+  background-color: #ffffff;
+  color: #080710;
+  font-weight: 600;
+  border-radius: 5px;
+  border-style: none;
+}

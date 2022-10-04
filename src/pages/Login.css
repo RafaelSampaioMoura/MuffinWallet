@@ -65,7 +65,7 @@ body {
 ::placeholder {
   color: #e5e5e5;
 }
-button {
+.button-login {
   margin-top: 50px;
   width: 100%;
   background-color: #ffffff;

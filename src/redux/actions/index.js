@@ -6,6 +6,9 @@ export const SUBMIT_USER_EMAIL = "SUBMIT_USER_EMAIL";
 export const REQUEST_CURRENCY_INFORMATION = "REQUEST_CURRENCY_INFORMATION";
 export const RECEIVE_CURRENCY_INFORMATION = "RECEIVE_CURRENCY_INFORMATION";
 export const FAILED_CURRENCY_INFORMATION = "FAILED_CURRENCY_INFORMATION";
+export const REQUEST_EXPENSE_INFORMATION = "REQUEST_EXPENSE_INFORMATION";
+export const RECEIVE_EXPENSE_INFORMATION = "RECEIVE_EXPENSE_INFORMATION";
+export const FAILURE_EXPENSE_INFORMATION = "FAILURE_EXPENSE_INFORMATION";
 
 export const actSubmitUserEmail = (payload) => ({
   type: SUBMIT_USER_EMAIL,
@@ -26,6 +29,19 @@ const failureCurrencyInfo = (errorMessage) => ({
   error: errorMessage,
 });
 
+const successExpenseInfo = (payload, expense) => ({
+  type: RECEIVE_EXPENSE_INFORMATION,
+  expenses: {
+    ...expense,
+    exchangeRates: { ...payload },
+  },
+});
+
+const failureExpenseInfo = (errorMessage) => ({
+  type: FAILURE_EXPENSE_INFORMATION,
+  error: errorMessage,
+});
+
 export const fecthCurrencyInfo = () => async (dispatch) => {
   dispatch(requestCurrencyInfo());
 
@@ -35,6 +51,18 @@ export const fecthCurrencyInfo = () => async (dispatch) => {
     dispatch(successCurrencyInfo(response));
   } catch (error) {
     const errorAction = failureCurrencyInfo(error);
+    dispatch(errorAction);
+  }
+};
+
+export const fetchExpensesInfo = (expense) => async (dispatch) => {
+  dispatch(requestCurrencyInfo());
+
+  try {
+    const response = await getCurrencyInfo();
+    dispatch(successExpenseInfo(response, expense));
+  } catch (error) {
+    const errorAction = failureExpenseInfo(error);
     dispatch(errorAction);
   }
 };
