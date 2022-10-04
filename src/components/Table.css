@@ -7,7 +7,10 @@ td {
   border-collapse: collapse;
 }
 
-th,
+th {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 td {
   background-color: rgba(255, 255, 255, 0.13);
 }
@@ -25,7 +28,7 @@ table {
 }
 
 th, td {
-  width: 133px;
+  width: 135px;
 }
 
 td {
@@ -35,7 +38,11 @@ td {
 }
 
 th:nth-child(5), td:nth-child(5) {
-  width: 300px;
+  width: 280px;
+}
+
+td:last-child button {
+  margin: 0px 3px;
 }
 
 table button {
@@ -45,5 +52,5 @@ table button {
   border-radius: 5px;
   border-style: none;
   height: 30px;
-  padding: 0px 6px;
+  padding: 0px 3px;
 }

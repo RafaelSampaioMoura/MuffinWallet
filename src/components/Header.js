@@ -1,22 +1,22 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import "./Header.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import './Header.css';
 
 class Header extends Component {
   render() {
     const { email, expenses } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
     let valueToHeader = 0;
     if (expenses.length > 0) {
       const values = expenses.map((expense) => Number(expense.value));
       const conversions = expenses.map((expense) => expense.currency);
       const conversionRates = conversions.map(
-        (rate, index) => expenses[index].exchangeRates[rate].ask
+        (rate, index) => expenses[index].exchangeRates[rate].ask,
       );
       valueToHeader = values
         .reduce(
-          (total, sum, index) => (total = total + sum * conversionRates[index]),
-          0
+          (total, sum, index) => (total += sum * conversionRates[index]),
+          0,
         )
         .toFixed(2);
       // console.log(valueToHeader);
@@ -25,11 +25,15 @@ class Header extends Component {
     }
     return (
       <header>
-        <div className='banner'>TRYBE WALLET</div>
-        <div className='userInfo'>
-          <div data-testid='email-field'>Email: {email}</div>
-          <div data-testid='total-field'>{valueToHeader}</div>
-          <div data-testid='header-currency-field'>Câmbio: BRL</div>
+        <div className="banner">TRYBE WALLET</div>
+        <div className="userInfo">
+          <div data-testid="email-field">
+            Email:
+            {email}
+          </div>
+          {/* {valueToHeader === 0 ? <div data-testid="total-field">0.00</div> : <div data-testid="total-field">{valueToHeader}</div>} */}
+          <div data-testid="total-field">{Number(valueToHeader).toFixed(2)}</div>
+          <div data-testid="header-currency-field">Câmbio: BRL</div>
         </div>
       </header>
     );

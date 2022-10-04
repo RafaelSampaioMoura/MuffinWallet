@@ -1,14 +1,17 @@
-import getCurrencyInfo from "../../services/walletAPI";
+import getCurrencyInfo from '../../services/walletAPI';
 
 // Coloque aqui suas actions
-export const SUBMIT_USER_EMAIL = "SUBMIT_USER_EMAIL";
+export const SUBMIT_USER_EMAIL = 'SUBMIT_USER_EMAIL';
 
-export const REQUEST_CURRENCY_INFORMATION = "REQUEST_CURRENCY_INFORMATION";
-export const RECEIVE_CURRENCY_INFORMATION = "RECEIVE_CURRENCY_INFORMATION";
-export const FAILED_CURRENCY_INFORMATION = "FAILED_CURRENCY_INFORMATION";
-export const REQUEST_EXPENSE_INFORMATION = "REQUEST_EXPENSE_INFORMATION";
-export const RECEIVE_EXPENSE_INFORMATION = "RECEIVE_EXPENSE_INFORMATION";
-export const FAILURE_EXPENSE_INFORMATION = "FAILURE_EXPENSE_INFORMATION";
+export const REQUEST_CURRENCY_INFORMATION = 'REQUEST_CURRENCY_INFORMATION';
+export const RECEIVE_CURRENCY_INFORMATION = 'RECEIVE_CURRENCY_INFORMATION';
+export const FAILED_CURRENCY_INFORMATION = 'FAILED_CURRENCY_INFORMATION';
+export const REQUEST_EXPENSE_INFORMATION = 'REQUEST_EXPENSE_INFORMATION';
+export const RECEIVE_EXPENSE_INFORMATION = 'RECEIVE_EXPENSE_INFORMATION';
+export const FAILURE_EXPENSE_INFORMATION = 'FAILURE_EXPENSE_INFORMATION';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT = 'EDIT';
+export const EDITED_ROW = 'EDITED_ROW';
 
 export const actSubmitUserEmail = (payload) => ({
   type: SUBMIT_USER_EMAIL,
@@ -21,7 +24,7 @@ const requestCurrencyInfo = () => ({
 
 const successCurrencyInfo = (payload) => ({
   type: RECEIVE_CURRENCY_INFORMATION,
-  currencies: Object.keys(payload).filter((currency) => currency !== "USDT"),
+  currencies: Object.keys(payload).filter((currency) => currency !== 'USDT'),
 });
 
 const failureCurrencyInfo = (errorMessage) => ({
@@ -40,6 +43,21 @@ const successExpenseInfo = (payload, expense) => ({
 const failureExpenseInfo = (errorMessage) => ({
   type: FAILURE_EXPENSE_INFORMATION,
   error: errorMessage,
+});
+
+export const deleteExpense = (payload) => ({
+  type: DELETE_EXPENSE,
+  expenses: [...payload],
+});
+
+export const allowEdit = (payload) => ({
+  type: EDIT,
+  idToEdit: payload,
+});
+
+export const editedRow = (payload) => ({
+  type: EDITED_ROW,
+  expenses: payload,
 });
 
 export const fecthCurrencyInfo = () => async (dispatch) => {

@@ -1,11 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { deleteExpense, allowEdit } from "../redux/actions";
 import "./Table.css";
 
 class Table extends Component {
+  handleExclude = (id) => {
+    const { expenses, dispatch } = this.props;
+    // console.log(target.name);
+    const newExpenses = expenses.filter(
+      (expense) => expense.id !== Number(id)
+    );
+    dispatch(deleteExpense(newExpenses));
+    // console.log(newExpenses);
+  };
+
+  handleEdit = (id) => {
+    const { dispatch } = this.props;
+    dispatch(allowEdit(id));
+  };
+
   render() {
-    const { expenses } = this.props;
-    console.log(expenses);
+    const { expenses, editor } = this.props;
+    // console.log(expenses);
     return (
       <table>
         <thead>
@@ -25,32 +41,45 @@ class Table extends Component {
         </thead>
         <tbody>
           {expenses.length > 0 &&
-            expenses.map((expense) => {
-              return (
-                <tr key={expense.id}>
-                  <td>{expense.description}</td>
-                  <td>{expense.tag}</td>
-                  <td>{expense.method}</td>
-                  <td>{Number(expense.value).toFixed(2)}</td>
-                  <td>{expense.exchangeRates[expense.currency].name}</td>
-                  <td>
-                    {Number(
-                      expense.exchangeRates[expense.currency].ask
-                    ).toFixed(2)}
-                  </td>
-                  <td>
-                    {(
-                      Number(expense.value) *
-                      Number(expense.exchangeRates[expense.currency].ask)
-                    ).toFixed(2)}
-                  </td>
-                  <td>Real</td>
-                  <td>
-                    <button type='button'>Editar/Excluir</button>
-                  </td>
-                </tr>
-              );
-            })}
+            expenses.map((expense) => (
+              <tr key={ expense.id }>
+                <td>{expense.description}</td>
+                <td>{expense.tag}</td>
+                <td>{expense.method}</td>
+                <td>{Number(expense.value).toFixed(2)}</td>
+                <td>{expense.exchangeRates[expense.currency].name}</td>
+                <td>
+                  {Number(expense.exchangeRates[expense.currency].ask).toFixed(
+                    2
+                  )}
+                </td>
+                <td>
+                  {(
+                    Number(expense.value) *
+                    Number(expense.exchangeRates[expense.currency].ask)
+                  ).toFixed(2)}
+                </td>
+                <td>Real</td>
+                <td>
+                  <button
+                    type='button'
+                    onClick={() => this.handleEdit(expense.id)}
+                    name={expense.id}
+                    data-testid='edit-btn'
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type='button'
+                    onClick={() => this.handleExclude(expense.id)}
+                    data-testid='delete-btn'
+                    name={expense.id}
+                  >
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     );
@@ -59,6 +88,7 @@ class Table extends Component {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  idToEdit: state.wallet.idToEdit,
 });
 
 export default connect(mapStateToProps, null)(Table);
