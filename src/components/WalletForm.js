@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fecthCurrencyInfo, fetchExpensesInfo, editedRow } from "../redux/actions";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fecthCurrencyInfo, fetchExpensesInfo, editedRow } from '../redux/actions';
 // import { fetchCurrencyInfo } from "../redux/actions";
 // import getCurrencyInfo from "../services/walletAPI";
-import Loading from "./Loading";
-import "./WalletForm.css";
+import Loading from './Loading';
+import './WalletForm.css';
 
 class WalletForm extends Component {
   constructor(props) {
@@ -12,11 +12,11 @@ class WalletForm extends Component {
 
     this.state = {
       id: 0,
-      value: "",
-      description: "",
-      currency: "USD",
-      method: "Dinheiro",
-      tag: "Alimentação",
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
     };
   }
 
@@ -34,11 +34,11 @@ class WalletForm extends Component {
 
   resetToDefault = () => {
     this.setState({
-      value: "",
-      description: "",
-      currency: "USD",
-      method: "Dinheiro",
-      tag: "Alimentação",
+      value: '',
+      description: '',
+      currency: 'USD',
+      method: 'Dinheiro',
+      tag: 'Alimentação',
     });
   };
 
@@ -57,10 +57,10 @@ class WalletForm extends Component {
     const { value, method, description, tag, currency } = this.state;
     const { dispatch, idToEdit, expenses } = this.props;
     // console.log(idToEdit);
-    const editExpense = expenses.find((expense) => {
+    const editExpense = expenses.find((expense) =>
       // console.log(expense.id);
       // console.log(idToEdit);
-      return expense.id === idToEdit});
+      expense.id === idToEdit);
     // console.log(editExpense);
     const { exchangeRates } = editExpense;
     const expensesFiltrado = expenses.filter((expense) => expense.id !== idToEdit);
@@ -77,82 +77,83 @@ class WalletForm extends Component {
     const { value, description } = this.state;
     // console.log(currencies);
     return (
-      <form className='wallet-form'>
-        <label htmlFor='value-input'>
-          Valor:{" "}
+      <form className="wallet-form">
+        <label htmlFor="value-input">
+          Valor:
+          {' '}
           <input
-            type='number'
-            name='value'
-            id='value-input'
-            data-testid='value-input'
-            value={value}
-            onChange={this.handleInput}
+            type="number"
+            name="value"
+            id="value-input"
+            data-testid="value-input"
+            value={ value }
+            onChange={ this.handleInput }
           />
         </label>
-        <label htmlFor='description-input'>
-          Descrição:{" "}
+        <label htmlFor="description-input">
+          Descrição:
+          {' '}
           <input
-            type='text'
-            name='description'
-            id='description-input'
-            data-testid='description-input'
-            value={description}
-            onChange={this.handleInput}
+            type="text"
+            name="description"
+            id="description-input"
+            data-testid="description-input"
+            value={ description }
+            onChange={ this.handleInput }
           />
         </label>
-        <label htmlFor='currency-input'>
+        {isFetching ? (
+          <Loading />
+        ) : (<label htmlFor="currency-input">
           Câmbio:
           <select
-            name='currency'
-            id='currency-input'
-            data-testid='currency-input'
-            onChange={this.handleInput}
+            name="currency"
+            id="currency-input"
+            data-testid="currency-input"
+            onChange={ this.handleInput }
           >
-            {isFetching ? (
-              <Loading />
-            ) : (
-              currencies.map((currency) => (
-                <option key={currency} value={currency}>
-                  {currency}
-                </option>
-              ))
-            )}
+            {currencies.map((currency) => (
+              <option key={ currency } value={ currency }>
+                {currency}
+              </option>
+            ))}
           </select>
-        </label>
-        <label htmlFor='method-input'>
+        </label>)}
+
+        <label htmlFor="method-input">
           Método:
           <select
-            name='method'
-            id='method-input'
-            data-testid='method-input'
-            onChange={this.handleInput}
+            name="method"
+            id="method-input"
+            data-testid="method-input"
+            onChange={ this.handleInput }
           >
-            <option value='Dinheiro'>Dinheiro</option>
-            <option value='Cartão de crédito'>Cartão de crédito</option>
-            <option value='Cartão de débito'>Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
-        <label htmlFor='tag-input'>
+        <label htmlFor="tag-input">
           Tipo:
           <select
-            name='tag'
-            id='tag-input'
-            data-testid='tag-input'
-            onChange={this.handleInput}
+            name="tag"
+            id="tag-input"
+            data-testid="tag-input"
+            onChange={ this.handleInput }
           >
-            <option value='Alimentação'>Alimentação</option>
-            <option value='Lazer'>Lazer</option>
-            <option value='Trabalho'>Trabalho</option>
-            <option value='Transporte'>Transporte</option>
-            <option value='Saúde'>Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
         {editor ? (
-          <button type='submit' onClick={this.handleEdit}>
+          <button type="submit" onClick={ this.handleEdit }>
             Editar despesa
           </button>
         ) : (
-          <button type='submit' onClick={this.handleSubmit}>
+          <button type="submit" onClick={ this.handleSubmit }>
             Adicionar despesa
           </button>
         )}
