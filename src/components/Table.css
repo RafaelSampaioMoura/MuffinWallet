@@ -1,9 +1,6 @@
-table,
-tr,
-th,
-td {
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.13);
+table, tr, th, td {
+  border: 1px solid rgba(255, 255, 255, 0.13);  
+  color: white;
   border-collapse: collapse;
 }
 
@@ -13,6 +10,9 @@ th {
 
 td {
   background-color: rgba(255, 255, 255, 0.13);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 tr {
@@ -31,26 +31,22 @@ th, td {
   width: 135px;
 }
 
-td {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 th:nth-child(5), td:nth-child(5) {
   width: 280px;
 }
 
-td:last-child button {
-  margin: 0px 3px;
-}
-
 table button {
-  background-color: #ffffff;
+  background-color: white;
   color: #080710;
-  font-weight: 600;
   border-radius: 5px;
+  font-weight: 600;
   border-style: none;
   height: 30px;
-  padding: 0px 3px;
+  padding-right: 3px;
+  padding-left: 3px;
+}
+
+td:last-child button {
+  margin-right: 3px;
+  margin-left: 3px;
 }
