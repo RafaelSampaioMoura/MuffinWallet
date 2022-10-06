@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { deleteExpense, allowEdit } from '../redux/actions';
 import './Table.css';
 
@@ -90,5 +91,10 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
   idToEdit: state.wallet.idToEdit,
 });
+
+Table.propTypes = {
+  expenses: PropTypes.shape([]).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, null)(Table);

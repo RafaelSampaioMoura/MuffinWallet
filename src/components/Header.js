@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './Header.css';
 
 class Header extends Component {
@@ -15,7 +16,10 @@ class Header extends Component {
       );
       valueToHeader = values
         .reduce(
-          (total, sum, index) => (total += sum * conversionRates[index]),
+          (total, sum, index) => {
+            total += sum * conversionRates[index];
+            return total;
+          },
           0,
         )
         .toFixed(2);
@@ -44,5 +48,10 @@ const mapStateToProps = (state) => ({
   email: state.user.email,
   expenses: state.wallet.expenses,
 });
+
+Header.propTypes = {
+  email: PropTypes.string.isRequired,
+  expenses: PropTypes.shape([]).isRequired,
+};
 
 export default connect(mapStateToProps, null)(Header);

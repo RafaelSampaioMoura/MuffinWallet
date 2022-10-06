@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fecthCurrencyInfo, fetchExpensesInfo, editedRow } from '../redux/actions';
 // import { fetchCurrencyInfo } from "../redux/actions";
 // import getCurrencyInfo from "../services/walletAPI";
@@ -57,11 +58,7 @@ class WalletForm extends Component {
     const { value, method, description, tag, currency } = this.state;
     const { dispatch, idToEdit, expenses } = this.props;
     // console.log(idToEdit);
-    const editExpense = expenses.find((expense) =>
-      // console.log(expense.id);
-      // console.log(idToEdit);
-      expense.id === idToEdit);
-    // console.log(editExpense);
+    const editExpense = expenses.find((expense) => expense.id === idToEdit);
     const { exchangeRates } = editExpense;
     const expensesFiltrado = expenses.filter((expense) => expense.id !== idToEdit);
     const rowEditado = {
@@ -104,22 +101,22 @@ class WalletForm extends Component {
         </label>
         {isFetching ? (
           <Loading />
-        ) : (<label htmlFor="currency-input">
-          Câmbio:
-          <select
-            name="currency"
-            id="currency-input"
-            data-testid="currency-input"
-            onChange={ this.handleInput }
-          >
-            {currencies.map((currency) => (
-              <option key={ currency } value={ currency }>
-                {currency}
-              </option>
-            ))}
-          </select>
-        </label>)}
-
+        ) : (
+          <label htmlFor="currency-input">
+            Câmbio:
+            <select
+              name="currency"
+              id="currency-input"
+              data-testid="currency-input"
+              onChange={ this.handleInput }
+            >
+              {currencies.map((currency) => (
+                <option key={ currency } value={ currency }>
+                  {currency}
+                </option>
+              ))}
+            </select>
+          </label>)}
         <label htmlFor="method-input">
           Método:
           <select
@@ -169,5 +166,14 @@ const mapStateToProps = (state) => ({
   editor: state.wallet.editor,
   idToEdit: state.wallet.idToEdit,
 });
+
+WalletForm.propTypes = {
+  expenses: PropTypes.shape([]).isRequired,
+  currencies: PropTypes.shape([]).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  editor: PropTypes.bool.isRequired,
+  idToEdit: PropTypes.number.isRequired,
+};
 
 export default connect(mapStateToProps, null)(WalletForm);

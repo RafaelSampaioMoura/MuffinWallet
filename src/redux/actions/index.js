@@ -8,7 +8,6 @@ export const RECEIVE_CURRENCY_INFORMATION = 'RECEIVE_CURRENCY_INFORMATION';
 export const FAILED_CURRENCY_INFORMATION = 'FAILED_CURRENCY_INFORMATION';
 export const REQUEST_EXPENSE_INFORMATION = 'REQUEST_EXPENSE_INFORMATION';
 export const RECEIVE_EXPENSE_INFORMATION = 'RECEIVE_EXPENSE_INFORMATION';
-export const FAILURE_EXPENSE_INFORMATION = 'FAILURE_EXPENSE_INFORMATION';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 export const EDIT = 'EDIT';
 export const EDITED_ROW = 'EDITED_ROW';
@@ -41,7 +40,7 @@ const successExpenseInfo = (payload, expense) => ({
 });
 
 const failureExpenseInfo = (errorMessage) => ({
-  type: FAILURE_EXPENSE_INFORMATION,
+  type: FAILED_CURRENCY_INFORMATION,
   error: errorMessage,
 });
 

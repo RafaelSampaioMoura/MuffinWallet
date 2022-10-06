@@ -4,10 +4,9 @@ import {
   RECEIVE_CURRENCY_INFORMATION,
   FAILED_CURRENCY_INFORMATION,
   RECEIVE_EXPENSE_INFORMATION,
-  FAILURE_EXPENSE_INFORMATION,
   DELETE_EXPENSE,
   EDIT,
-  EDITED_ROW
+  EDITED_ROW,
 } from '../actions';
 import INITIAL_STATE from './initialState';
 
@@ -34,12 +33,6 @@ const wallet = (state = INITIAL_STATE.wallet, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.expenses],
-      isFetching: false,
-    };
-  case FAILURE_EXPENSE_INFORMATION:
-    return {
-      ...state,
-      error: action.error,
       isFetching: false,
     };
   case DELETE_EXPENSE:
