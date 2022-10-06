@@ -1,7 +1,7 @@
-table, tr, th, td {
-  border: 1px solid rgba(255, 255, 255, 0.13);  
-  color: white;
+table , tr , th , td {
+  border: 1px solid rgba(255, 255, 255, 0.13);
   border-collapse: collapse;
+  color: white;
 }
 
 th {
@@ -9,9 +9,9 @@ th {
 }
 
 td {
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.13);
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -27,26 +27,26 @@ table {
   width: 100%;
 }
 
-th, td {
+th , td {
   width: 135px;
 }
 
-th:nth-child(5), td:nth-child(5) {
+th:nth-child( 5 ) , td:nth-child( 5 ) {
   width: 280px;
 }
 
 table button {
   background-color: white;
-  color: #080710;
   border-radius: 5px;
-  font-weight: 600;
   border-style: none;
+  color: #080710;
+  font-weight: 600;
   height: 30px;
-  padding-right: 3px;
   padding-left: 3px;
+  padding-right: 3px;
 }
 
 td:last-child button {
-  margin-right: 3px;
   margin-left: 3px;
+  margin-right: 3px;
 }
